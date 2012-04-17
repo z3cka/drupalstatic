@@ -3,7 +3,7 @@ Have you ever wondered about how to keep Drupal's sibling Static HTML Site from 
 I racked my brain on this issue for about 2 days and finally figured out a sane approach using good old Apache rewrite conditions and rules.
 
 <h3>Here is our directory structure:</h3>
-<pre>z3cka@ubutre-vm:/var/www$ tree -adL 3 <i>&lsaquo;-- tree command to print directory structure</i>
+<pre>z3cka@ubuntre-vm:/var/www$ tree -adL 3 <i>&lsaquo;-- tree command to print directory structure</i>
 ├── <b>drupalstatic</b> &lsaquo;-- Parent directory for Drupal and Static Siblings
 │   ├── <b>drupal</b> &lsaquo;-- Drupal's root
 │   └── <b>static</b> &lsaquo;-- Static Sibling's root
