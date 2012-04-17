@@ -1,0 +1,10 @@
+#Options -Indexes
+
+DirectoryIndex drupal/index.php
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.+) /var/www/drupalstatic/static/$1 [L]
