@@ -1,0 +1,89 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Drupalstatic</title>
+  <meta name="description" content="Solution for serving Drupal and Static Site files from sibling directories.">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Drupalstatic</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Solution for serving Drupal and Static Site files from sibling directories.</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/z3cka/drupalstatic/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/z3cka/drupalstatic/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/z3cka/drupalstatic" class="code">fork Drupalstatic on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <p>Have you ever wondered about how to keep Drupal's sibling Static HTML Site from corrupting Drupal's pristine file structure? Have you ever wanted to serve these sub-directories from the same path level? </p>
+
+<h3>I have. And I was able to come up with a solution.</h3>
+
+<p>I racked my brain on this issue for about 2 days and finally figured out a sane approach using good old Apache rewrite conditions and rules.</p>
+
+<h3>Here is our directory structure:</h3>
+
+<pre>z3cka@ubutre-vm:/var/www$ tree -adL 3 <i>‹-- tree command to print directory structure</i>
+├── <b>drupalstatic</b> ‹-- Parent directory for Drupal and Static Siblings
+│   ├── <b>drupal</b> ‹-- Drupal's root
+│   └── <b>static</b> ‹-- Static Sibling's root
+│       └── <b>sub-static</b> ‹-- one of Static Sibling's sub-directories
+</pre>
+
+<p>The trick is using apache mod_rewrite rules to traverse into the static portion of the directory structure first, and if nothing is found, pass the uri to Drupal. Meanwhile keeping the directory structure intact all unbeknownst to the user.</p>
+
+<p>This is a huge win for keeping 2 separate trees of files from mixing in with one another for the sake of being organized and easy of revision control.</p>
+
+<p>Currently it is using .htaccess on my local dev server. I puting this into it's own revision control before placing it all in a directive of an apache vhost config.</p>
+
+<p>The site lives here: http://ubuntre-vm/drupalstatic/ ... but must currently be accessed directly with the "drupal-static" hostname via http://drupal-static/ by adding this to your hosts file*:</p>
+
+<pre>131.216.164.67 drupal-static</pre>
+
+<p><i>*note: you must be on our local network too, sorry :-P</i></p>
+
+<p>This is because of how the url rewrites are currently set up... but I think this could be changed to work in a subirectory as well (ie: http://ubuntre-vm/drupalstatic/) .... but this is not the priority as of right now.</p>
+
+<p>link to the repo is forthcoming.</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/z3cka" class="avatar"><img src="https://secure.gravatar.com/avatar/03e8fefd637fb29d41fa4dfdc56d23ab?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="48" height="48"/></a> <a href="https://github.com/z3cka">z3cka</a> maintains <a href="https://github.com/z3cka/drupalstatic">Drupalstatic</a></p>
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/z3cka/drupalstatic/tarball/master" class="tar">tar</a><a href="https://github.com/z3cka/drupalstatic/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
